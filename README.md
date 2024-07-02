@@ -1,14 +1,108 @@
-# Welcome to your CDK TypeScript project
+# Welcome to onboarding_EverYoung
 
-This is a blank project for CDK development with TypeScript.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Project Overview
 
-## Useful commands
+OnboardingEverYoung is a project based on AWS Lambda and API Gateway, used to match and return user information based on the input name. This project is developed using TypeScript and relies on AWS CDK for infrastructure deployment.
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+## Project Dependencies
+
+- Node.js v22.3.0
+- npm
+- AWS CDK v2.147.2
+
+## Installation Steps
+
+1. Download the project files and ensure the following directory structure:
+
+```
+onboarding_EverYoung/
+├── lib/
+│   ├── lambda/
+│   │   ├── lambda.ts
+│   │   ├── lambda.d.ts
+│   │   ├── lambda.js
+│   ├── onboarding_EverYoung-stack.ts
+├── test.js
+├── package.json
+├── tsconfig.json
+```
+
+2. Navigate to the project directory in your terminal:
+
+```bash
+cd path/to/onboarding_EverYoung
+```
+
+3. Install project dependencies
+
+```bash
+npm install
+```
+
+4. Configure AWS credentials
+
+Ensure you have configured the AWS CLI with the correct access permissions. You can configure AWS credentials using the following command:
+
+```bash
+aws configure
+```
+
+5. Deploy the infrastructure
+
+```bash
+npx cdk deploy
+```
+
+## Running the Project
+
+### Development Environment
+
+You can run local tests using the following commands:
+
+1. Compile TypeScript code
+
+```bash
+npx tsc
+```
+
+2. Run the test script
+
+```bash
+node test.js
+```
+
+### Production Environment
+
+After deployment, the API Gateway URL will be output to the console. You can access the URL via a browser or the curl command. For example:
+
+```bash
+curl -X GET 'https://your-api-gateway-url/prod/?name=Huawen Wu'
+```
+
+## Environment Variable Configuration
+
+If the project requires environment variable configuration, ensure you create a `.env` file and define the necessary variables. Here is a sample `.env.example` file template:
+
+```plaintext
+AWS_REGION=ap-southeast-2
+```
+
+## Data Files or Other Resources
+
+Ensure the following files and directories exist in the project root:
+
+- `lib/lambda/lambda.ts`: The main code file for the Lambda function.
+- `lib/onboarding_EverYoung-stack.ts`: The CDK stack configuration file.
+- `test.js`: The script file used for local testing.
+
+## Support and Contact Information
+
+If you have any questions or need assistance, please contact the project maintainer:
+
+- Email: shiying.gao@sydney.edu.au
+
+---
+
+Thank you for using OnboardingEverYoung!
+```

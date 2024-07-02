@@ -1,16 +1,28 @@
 import * as cdk from 'aws-cdk-lib';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class OnboardingEverYoungStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
+    super(scope, id, {
+      env: {
+        account: process.env.CDK_DEFAULT_ACCOUNT,
+        region: process.env.CDK_DEFAULT_REGION,
+      },
+      ...props,
+    });
 
-    // The code that defines your stack goes here
+    // Lambda function
+    const myLambda = new lambda.Function(this, 'MyLambda', {
+      runtime: lambda.Runtime.NODEJS_20_X,
+      handler: 'lambda.handler',
+      code: lambda.Code.fromAsset('lib/lambda'),
+    });
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'OnboardingEverYoungQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    // API Gateway
+    new apigateway.LambdaRestApi(this, 'MyEndpoint', {
+      handler: myLambda,
+    });
   }
 }
